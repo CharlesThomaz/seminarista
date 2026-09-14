@@ -1,0 +1,1957 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1a1d3a" />
+    <title>Cathedral of Doctrine | Plataforma EAD</title>
+    <link rel="stylesheet" href="assets/css/modules.css" />
+    <style>
+      :root {
+        --bg: #0b1020;
+        --bg-2: #121a2d;
+        --panel: #151d33;
+        --panel-2: #1d2947;
+        --card: #1a2340;
+        --line: rgba(184, 199, 255, 0.12);
+        --text: #edf3ff;
+        --muted: #a9b7d7;
+        --primary: #7c93ff;
+        --primary-2: #5ee4c6;
+        --accent: #ff9b6a;
+        --success: #58d39b;
+        --warning: #ffd166;
+        --shadow: 0 18px 50px rgba(5, 9, 18, 0.35);
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+        color: var(--text);
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      a { color: inherit; text-decoration: none; }
+      button, input, textarea { font: inherit; }
+      button { cursor: pointer; }
+      .hidden { display: none !important; }
+
+      .app-shell {
+        min-height: 100vh;
+        display: flex;
+      }
+
+      .sidebar {
+        width: 260px;
+        background: rgba(11, 16, 32, 0.95);
+        border-right: 1px solid var(--line);
+        padding: 24px 18px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 8px 8px 20px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .logo {
+        width: 42px;
+        height: 42px;
+        display: grid;
+        place-items: center;
+        border-radius: 14px;
+        background: linear-gradient(135deg, var(--primary), var(--primary-2));
+        color: #06111d;
+        font-weight: 800;
+      }
+
+      .brand-text h2 {
+        margin: 0;
+        font-size: 1rem;
+      }
+
+      .brand-text span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.7rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .nav {
+        margin-top: 22px;
+        display: grid;
+        gap: 8px;
+      }
+
+      .nav-item {
+        background: transparent;
+        border: 0;
+        text-align: left;
+        color: var(--muted);
+        border-radius: 12px;
+        padding: 12px 12px;
+        font-weight: 700;
+      }
+
+      .nav-item.active {
+        background: rgba(124, 147, 255, 0.12);
+        border-left: 3px solid var(--primary);
+        color: var(--text);
+        padding-left: 9px;
+      }
+
+      .sidebar-card {
+        margin-top: auto;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 16px 14px;
+      }
+
+      .sidebar-card strong {
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .sidebar-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.6;
+        font-size: 0.8rem;
+      }
+
+      .main {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .topbar {
+        height: 82px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 28px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .page-tag {
+        color: var(--muted);
+        font-size: 0.74rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+      }
+
+      .header-church {
+        margin: 6px 0 0;
+        font-size: 1.3rem;
+      }
+
+      .topbar-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .btn {
+        border: 1px solid var(--line);
+        background: transparent;
+        color: var(--text);
+        border-radius: 12px;
+        padding: 10px 14px;
+        font-weight: 700;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--primary), #9b7cff);
+        border: 0;
+        color: white;
+      }
+
+      .btn-success {
+        background: rgba(88, 211, 155, 0.12);
+        color: var(--success);
+        border-color: rgba(88, 211, 155, 0.4);
+      }
+
+      .google-btn {
+        background: white;
+        color: #0d1528;
+        border: 0;
+      }
+
+      .user-box {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: #59616d;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 12px;
+        padding: 7px 12px;
+      }
+
+      .avatar {
+        width: 34px;
+        height: 34px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent), #ffd166);
+        color: #171a2b;
+        font-weight: 800;
+      }
+
+      .user-copy {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.2;
+      }
+
+      .user-copy strong { font-size: 0.82rem; }
+      .user-copy span { color: var(--muted); font-size: 0.7rem; }
+      .user-copy small { color: #e4e8ed; font-size: 0.68rem; }
+
+      .page {
+        display: none;
+        padding: 28px;
+      }
+
+      .page.active { display: block; }
+
+      .hero {
+        background: linear-gradient(135deg, rgba(124, 147, 255, 0.18), rgba(94, 228, 198, 0.08));
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        padding: 26px;
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        align-items: center;
+      }
+
+      .eyebrow {
+        color: var(--primary-2);
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        font-size: 0.7rem;
+        font-weight: 700;
+      }
+
+      h1, h2, h3, h4 { margin: 0 0 10px; }
+      h1 {
+        font-size: clamp(2.3rem, 5vw, 3.7rem);
+        line-height: 1.04;
+      }
+
+      .lead {
+        color: var(--muted);
+        line-height: 1.7;
+        margin-top: 12px;
+        max-width: 720px;
+      }
+
+      .church-editor {
+        display: flex;
+        align-items: end;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .church-editor label {
+        display: grid;
+        gap: 8px;
+        color: var(--muted);
+        font-size: 0.75rem;
+      }
+
+      .church-editor input {
+        min-width: 260px;
+        background: rgba(255,255,255,0.02);
+        border: 1px solid var(--line);
+        color: var(--text);
+        border-radius: 10px;
+        padding: 11px 12px;
+      }
+
+      .church-consent {
+        display: flex !important;
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+        color: var(--muted);
+        font-size: 0.72rem;
+      }
+
+      .church-consent input { min-width: auto; width: auto; accent-color: var(--primary-2); }
+
+      .supporter-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        margin-top: 22px;
+        padding: 20px 22px;
+        background: linear-gradient(135deg, #555e6b, #343b46);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 18px;
+        color: #f3f5f7;
+      }
+
+      .supporter-card p { margin: 5px 0 0; color: #d5dbe1; line-height: 1.5; }
+      .supporter-seal { font-size: 1.8rem; }
+
+      .supporter-gallery {
+        margin-top: 22px;
+        padding: 20px 22px;
+        background: #59616d;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 18px;
+        color: #f3f5f7;
+      }
+
+      .supporter-gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+        gap: 12px;
+        margin-top: 16px;
+      }
+
+      .supporter-tile {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-height: 72px;
+        padding: 14px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 14px;
+      }
+
+      .supporter-tile .supporter-seal { font-size: 1.25rem; }
+
+      .marketing-card {
+        display: grid;
+        gap: 12px;
+        margin-top: 18px;
+        padding: 20px 22px;
+        background: #59616d;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 18px;
+        color: #f3f5f7;
+      }
+
+      .marketing-links { display: flex; flex-wrap: wrap; gap: 10px; }
+      .marketing-links a { color: #fff; font-weight: 700; }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 16px;
+        margin-top: 22px;
+      }
+
+      .stat-card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        padding: 18px 19px;
+        border-radius: 18px;
+      }
+
+      .stat-card .label {
+        color: var(--muted);
+        font-size: 0.72rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .stat-card strong {
+        display: block;
+        margin-top: 12px;
+        font-size: 2rem;
+      }
+
+      .stat-card small {
+        color: var(--muted);
+      }
+
+      .learning-guide {
+        margin-top: 24px;
+        background: linear-gradient(135deg, rgba(37, 48, 78, 0.9), rgba(22, 29, 51, 0.92));
+        border: 1px solid rgba(218, 177, 88, 0.35);
+        border-radius: 18px;
+        padding: 22px;
+      }
+
+      .learning-guide h2 { margin-bottom: 8px; }
+      .learning-guide > p { color: var(--muted); line-height: 1.7; }
+
+      .guide-steps {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 18px;
+      }
+
+      .guide-step {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 14px;
+        background: rgba(255,255,255,0.04);
+      }
+
+      .guide-step strong {
+        display: block;
+        color: var(--warning);
+        margin-bottom: 8px;
+      }
+
+      .guide-step span {
+        color: var(--muted);
+        font-size: 0.86rem;
+        line-height: 1.5;
+      }
+
+      .progress-track {
+        width: 100%;
+        height: 8px;
+        background: rgba(255,255,255,0.08);
+        border-radius: 999px;
+        overflow: hidden;
+        margin-top: 10px;
+      }
+
+      .progress-bar {
+        height: 100%;
+        width: 0%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, var(--primary), var(--primary-2));
+      }
+
+      .section-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin: 28px 0 16px;
+      }
+
+      .section-head h2 {
+        font-size: 1.6rem;
+      }
+
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .module-card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 18px;
+        box-shadow: var(--shadow);
+      }
+
+      .module-card.done {
+        border-color: rgba(88, 211, 155, 0.4);
+        background: rgba(22, 42, 32, 0.9);
+      }
+
+      .card-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+      }
+
+      .module-number {
+        color: var(--primary-2);
+        font-weight: 800;
+      }
+
+      .module-badge {
+        color: var(--muted);
+        font-size: 0.7rem;
+        background: rgba(255,255,255,0.05);
+        border-radius: 999px;
+        padding: 6px 8px;
+      }
+
+      .module-card h3 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+      }
+
+      .module-card p {
+        color: var(--muted);
+        line-height: 1.6;
+        margin: 0 0 18px;
+      }
+
+      .card-meta {
+        display: flex;
+        justify-content: space-between;
+        color: var(--muted);
+        font-size: 0.72rem;
+        margin-bottom: 16px;
+      }
+
+      .card-btn {
+        width: 100%;
+        border-radius: 12px;
+        background: rgba(124, 147, 255, 0.08);
+        color: var(--text);
+        border: 1px solid rgba(124, 147, 255, 0.25);
+        padding: 10px 12px;
+        font-weight: 700;
+      }
+
+      .detail-card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        padding: 22px;
+      }
+
+      .detail-head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .detail-head p {
+        color: var(--muted);
+        line-height: 1.7;
+        max-width: 760px;
+      }
+
+      .module-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin: 18px 0 24px;
+      }
+
+      .learning-core {
+        display: grid;
+        gap: 18px;
+        margin-top: 24px;
+      }
+
+      .learning-step {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(135deg, rgba(124, 147, 255, 0.14), rgba(17, 20, 34, 0.94));
+        border: 1px solid rgba(124, 147, 255, 0.35);
+        border-radius: 20px;
+        padding: 24px;
+      }
+
+      .learning-step.material-step {
+        background: linear-gradient(135deg, rgba(88, 211, 155, 0.12), rgba(17, 20, 34, 0.94));
+        border-color: rgba(88, 211, 155, 0.32);
+      }
+
+      .step-number {
+        display: inline-grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        margin-bottom: 14px;
+        border-radius: 50%;
+        background: var(--primary);
+        color: #08131e;
+        font-weight: 900;
+      }
+
+      .material-step .step-number { background: var(--success); }
+
+      .learning-step h3 {
+        margin-bottom: 8px;
+        font-size: 1.35rem;
+      }
+
+      .learning-step p {
+        max-width: 760px;
+        color: var(--muted);
+        line-height: 1.7;
+        margin-bottom: 18px;
+      }
+
+      .learning-status {
+        display: block;
+        margin-top: 12px;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+
+      .lesson-viewer {
+        display: none;
+        margin-bottom: 24px;
+        background: rgba(17, 20, 34, 0.9);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 12px;
+      }
+
+      .lesson-viewer.visible { display: block; }
+
+      .lesson-viewer iframe {
+        display: block;
+        width: 100%;
+        height: min(72vh, 760px);
+        min-height: 480px;
+        border: 0;
+        border-radius: 12px;
+        background: #fff;
+      }
+
+      .quiz-box {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 20px;
+        margin-top: 24px;
+      }
+
+      .question {
+        margin-bottom: 18px;
+      }
+
+      .question p {
+        margin-bottom: 10px;
+        font-weight: 700;
+      }
+
+      .options {
+        display: grid;
+        gap: 8px;
+      }
+
+      .option {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--muted);
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+      }
+
+      .option input { accent-color: var(--primary); }
+
+      .status {
+        margin-top: 12px;
+        color: var(--muted);
+      }
+
+      .two-col {
+        display: grid;
+        grid-template-columns: 1.3fr 0.7fr;
+        gap: 18px;
+      }
+
+      .profile-box, .summary-box, .exam-box, .certificate-box {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 20px;
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .field {
+        display: grid;
+        gap: 8px;
+      }
+
+      .field.full { grid-column: 1 / -1; }
+
+      input, textarea {
+        width: 100%;
+        border: 1px solid var(--line);
+        background: rgba(255,255,255,0.02);
+        border-radius: 10px;
+        color: var(--text);
+        padding: 11px 12px;
+      }
+
+      textarea { min-height: 120px; resize: vertical; }
+
+      .summary-list {
+        list-style: none;
+        margin: 18px 0 0;
+        padding: 0;
+        display: grid;
+        gap: 12px;
+      }
+
+      .summary-list li {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        color: var(--muted);
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 8px;
+      }
+
+      .certificate-box {
+        max-width: 760px;
+        margin: 0 auto;
+        text-align: center;
+        padding: 42px 24px;
+      }
+
+      .seal {
+        width: 84px;
+        height: 84px;
+        border-radius: 50%;
+        border: 2px solid var(--warning);
+        color: var(--warning);
+        display: grid;
+        place-items: center;
+        font-size: 2rem;
+        margin: 0 auto 18px;
+      }
+
+      .certificate-box h2 { font-size: 2.1rem; }
+      .certificate-box p { color: var(--muted); line-height: 1.7; }
+
+      .auth-overlay {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        background: rgba(4, 7, 15, 0.88);
+        z-index: 40;
+      }
+
+      .auth-box {
+        width: min(420px, 92vw);
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 28px 24px;
+        text-align: center;
+        box-shadow: var(--shadow);
+      }
+
+      .auth-mark {
+        width: 60px;
+        height: 60px;
+        display: grid;
+        place-items: center;
+        margin: 0 auto 16px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, var(--primary), var(--primary-2));
+        color: #08131e;
+        font-weight: 800;
+      }
+
+      .auth-box p {
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .terms-modal {
+        position: fixed;
+        inset: 0;
+        display: none;
+        place-items: center;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 50;
+      }
+
+      .terms-modal.visible { display: grid; }
+
+      .terms-box {
+        width: min(540px, 90vw);
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 22px;
+      }
+
+      .terms-box p {
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .terms-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      @media (max-width: 980px) {
+        .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .two-col { grid-template-columns: 1fr; }
+      }
+
+      @media (max-width: 760px) {
+        body { overflow-x: hidden; }
+        .app-shell { display: block; }
+        .sidebar {
+          width: 100%;
+          padding: 16px;
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+        }
+        .brand { padding-bottom: 14px; }
+        .brand-text h2 { font-size: 0.92rem; }
+        .nav {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 6px;
+          margin-top: 14px;
+        }
+        .nav-item { min-height: 44px; padding: 10px 8px; font-size: 0.82rem; }
+        .topbar {
+          padding: 0 18px;
+          height: auto;
+          min-height: 82px;
+          flex-direction: column;
+          justify-content: center;
+          align-items: flex-start;
+          gap: 12px;
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+        .topbar-actions { width: 100%; flex-wrap: wrap; }
+        .topbar-actions > .btn { flex: 1 1 140px; }
+        .user-box { min-width: 0; flex: 1 1 190px; }
+        .user-copy { min-width: 0; }
+        .user-copy span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .page { padding: 20px 16px 40px; }
+        .hero, .detail-head, .section-head { flex-direction: column; align-items: flex-start; }
+        .hero { padding: 20px; }
+        h1 { font-size: clamp(2rem, 10vw, 3rem); }
+        .church-editor { width: 100%; justify-content: stretch; align-items: stretch; }
+        .church-editor label { width: 100%; }
+        .church-editor input { width: 100%; min-width: 0; }
+        .church-editor .btn { width: 100%; }
+        .cards, .stats, .form-grid { grid-template-columns: 1fr; }
+        .guide-steps { grid-template-columns: 1fr; }
+        .module-actions { display: grid; grid-template-columns: 1fr; }
+        .module-actions .btn, .module-actions a { width: 100%; text-align: center; }
+        .learning-step { padding: 18px; }
+        .lesson-viewer { padding: 8px; }
+        .lesson-viewer iframe { height: 58vh; min-height: 300px; }
+        .terms-actions { flex-direction: column-reverse; }
+        .terms-actions .btn { width: 100%; }
+        .certificate-box { padding: 28px 18px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="authOverlay" class="auth-overlay">
+      <div class="auth-box">
+        <div class="auth-mark">CD</div>
+        <div class="eyebrow">Plataforma de formação</div>
+        <h2>Entre na sua conta</h2>
+        <p>Faça login para salvar progresso, acessar materiais, receber pontos e emitir certificado.</p>
+        <button id="googleLogin" class="btn google-btn" style="margin-top: 18px;">Entrar com Google</button>
+      </div>
+    </div>
+
+    <div id="termsModal" class="terms-modal">
+      <div class="terms-box">
+        <div class="eyebrow">Termo de aceite</div>
+        <h3>Política do curso</h3>
+        <p>Ao continuar, o aluno declara que leu os materiais, aceitou o conteúdo e as regras da plataforma, incluindo a necessidade de consumir aulas, baixar materiais e responder avaliações obrigatórias.</p>
+        <p>O acesso e o progresso ficam salvos no navegador do aluno para fins de acompanhamento didático.</p>
+        <div class="terms-actions">
+          <button id="declineTerms" class="btn">Recusar</button>
+          <button id="acceptTerms" class="btn btn-primary">Aceitar e continuar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="logo">CD</div>
+          <div class="brand-text">
+            <span>Formação</span>
+            <h2>Cathedral of Doctrine</h2>
+          </div>
+        </div>
+
+        <nav class="nav">
+          <button class="nav-item active" data-view="dashboard">Dashboard</button>
+          <button class="nav-item" data-view="modules">Módulos</button>
+          <button class="nav-item" data-view="profile">Perfil</button>
+          <button class="nav-item" data-view="exam">Prova final</button>
+          <button class="nav-item" data-view="certificate">Certificado</button>
+        </nav>
+
+        <div class="sidebar-card">
+          <strong id="sidebarChurch">Igreja Batista Shalom</strong>
+          <p>Plataforma digital de ensino com formação, acompanhamento e evolução do aluno.</p>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <div class="page-tag">Plataforma digital</div>
+            <h2 id="headerChurch" class="header-church">Igreja Batista Shalom</h2>
+          </div>
+
+          <div class="topbar-actions">
+            <button id="loginBtn" class="btn google-btn">Entrar com Google</button>
+            <div id="userBox" class="user-box hidden">
+              <div id="userAvatar" class="avatar">AA</div>
+              <div class="user-copy">
+                <strong id="userName">Aluno</strong>
+                <span id="userEmail">aluno@exemplo.com</span>
+                <small id="userChurch">Igreja não informada</small>
+              </div>
+            </div>
+            <button id="logoutBtn" class="btn hidden">Sair</button>
+          </div>
+        </header>
+
+        <section class="page active" data-view="dashboard">
+          <div class="hero">
+            <div>
+              <div class="eyebrow">Curso completo</div>
+              <h1 id="heroTitle">Plataforma de formação EAD</h1>
+              <p class="lead">Aprendizagem estruturada, materiais obrigatórios, evolução por módulos, prova final e certificação para criar uma experiência completa de educação digital.</p>
+            </div>
+
+            <div class="church-editor">
+              <label>
+                Nome da igreja
+                <input id="churchNameInput" type="text" value="Igreja Batista Shalom" />
+              </label>
+              <label class="church-consent">
+                <input id="churchSupporterConsent" type="checkbox" />
+                Pode exibir como igreja apoiadora
+              </label>
+              <button id="applyChurchName" class="btn btn-primary">Aplicar</button>
+            </div>
+          </div>
+
+          <div class="stats">
+            <div class="stat-card">
+              <div class="label">Progresso</div>
+              <strong id="progressValue">0%</strong>
+              <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+              <small id="progressText">0 de 12 módulos</small>
+            </div>
+            <div class="stat-card">
+              <div class="label">Próximo passo</div>
+              <strong id="nextModuleValue">Módulo 1</strong>
+              <small>Continue sua jornada</small>
+            </div>
+          </div>
+
+          <section class="learning-guide">
+            <div class="eyebrow">Roteiro do aluno</div>
+            <h2>Como estudar em cada módulo</h2>
+            <p>Os slides apresentam a formação como uma construção: comece pela fundação, compreenda a Palavra e transforme o aprendizado em prática ministerial.</p>
+            <div class="guide-steps">
+              <div class="guide-step"><strong>1. Escolha o módulo</strong><span>Entre em “Módulos” e abra o próximo conteúdo da sua jornada.</span></div>
+              <div class="guide-step"><strong>2. Veja a aula</strong><span>Clique em “Ver aula” e leia o slide real apresentado dentro da plataforma.</span></div>
+              <div class="guide-step"><strong>3. Baixe o PDF</strong><span>Baixe o material do módulo para consultar, estudar e liberar a redação.</span></div>
+              <div class="guide-step"><strong>4. Escreva e avance</strong><span>Prepare o sermão dominical, salve a redação e avance somente quando tudo estiver concluído.</span></div>
+            </div>
+          </section>
+
+          <div class="section-head">
+            <h2>Seu próximo passo</h2>
+            <button class="btn" data-view="modules">Ver todos</button>
+          </div>
+
+          <div id="dashboardCards" class="cards"></div>
+
+          <section id="supporterGallery" class="supporter-gallery hidden">
+            <div class="eyebrow">Igrejas apoiadoras do Projeto Seminarista</div>
+            <h2>Quem apoia esta formação</h2>
+            <p>Estas igrejas autorizaram a exibição de seus nomes como apoiadoras do projeto.</p>
+            <div id="supporterGalleryGrid" class="supporter-gallery-grid"></div>
+          </section>
+
+          <article class="marketing-card">
+            <div class="eyebrow">Contato de marketing</div>
+            <h3>Fale com o Projeto Seminarista</h3>
+            <div class="marketing-links">
+              <a href="mailto:lagoasmarketing@gmail.com">lagoasmarketing@gmail.com</a>
+              <a href="tel:+5531971656313">(31) 97165-6313</a>
+            </div>
+          </article>
+        </section>
+
+        <section class="page" data-view="modules">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">Biblioteca</div>
+              <h2>Módulos da formação</h2>
+              <p class="status">Escolha livremente qualquer módulo para estudar. Cada módulo tem sua própria aula, apostila e redação.</p>
+            </div>
+            <button class="btn" data-view="dashboard">Voltar</button>
+          </div>
+          <div id="moduleList" class="cards"></div>
+        </section>
+
+        <section class="page" data-view="profile">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">Perfil</div>
+              <h2>Dados do aluno</h2>
+            </div>
+            <button class="btn" data-view="dashboard">Voltar</button>
+          </div>
+
+          <div class="two-col">
+            <div class="profile-box">
+              <div class="form-grid">
+                <label class="field">
+                  <span>Nome</span>
+                  <input id="profileName" type="text" />
+                </label>
+                <label class="field">
+                  <span>E-mail</span>
+                  <input id="profileEmail" type="email" />
+                </label>
+                <label class="field">
+                  <span>Igreja / congregação</span>
+                  <input id="profileChurch" type="text" />
+                </label>
+                <label class="field">
+                  <span>Telefone</span>
+                  <input id="profilePhone" type="tel" />
+                </label>
+                <label class="field full">
+                  <span>Curso / formação</span>
+                  <input id="profileCourse" type="text" />
+                </label>
+                <label class="field full">
+                  <span>Sobre você</span>
+                  <textarea id="profileBio"></textarea>
+                </label>
+              </div>
+
+              <div class="module-actions" style="margin-top: 18px;">
+                <button id="saveProfile" class="btn btn-primary">Salvar perfil</button>
+                <button id="resetFormation" class="btn">Zerar formação</button>
+              </div>
+              <div id="profileStatus" class="status"></div>
+            </div>
+
+            <div class="summary-box">
+              <div class="eyebrow">Resumo</div>
+              <h3 id="summaryName">Aluno</h3>
+              <p id="summaryEmail">aluno@exemplo.com</p>
+              <ul class="summary-list">
+                <li><span>Igreja</span><strong id="summaryChurch">Não informada</strong></li>
+                <li><span>Curso</span><strong id="summaryCourse">Não informado</strong></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="page" data-view="module-detail">
+          <div id="detailContainer" class="detail-card"></div>
+        </section>
+
+        <section class="page" data-view="exam">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">Avaliação</div>
+              <h2>Prova final</h2>
+            </div>
+            <button class="btn" data-view="dashboard">Voltar</button>
+          </div>
+
+          <div class="exam-box">
+            <p class="lead">Para receber o certificado, conclua os 12 módulos e entregue a redação final. A redação deve ter pelo menos 500 caracteres e será registrada no seu histórico.</p>
+            <div id="examForm" class="quiz-box" style="margin-top: 20px; background: transparent; padding: 0; border: 0;"></div>
+            <div class="module-actions" style="margin-top: 18px;">
+              <button id="submitExam" class="btn btn-primary">${state.finalEssaySubmittedAt ? 'Fechar redação' : 'Enviar redação'}</button>
+            </div>
+            <div id="examStatus" class="status"></div>
+          </div>
+        </section>
+
+        <section class="page" data-view="certificate">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">Certificado</div>
+              <h2>Emissão do diploma</h2>
+            </div>
+            <button class="btn" data-view="dashboard">Voltar</button>
+          </div>
+
+          <div class="certificate-box">
+            <div class="seal">✓</div>
+            <h2>Certificado de Conclusão</h2>
+            <p>Este documento certifica que</p>
+            <h3 id="certName">Aluno(a)</h3>
+            <p>concluiu com êxito a formação</p>
+            <h4 id="certCourse">Cathedral of Doctrine</h4>
+            <p>emitido em <strong id="certDate">00/00/0000</strong></p>
+            <div id="certificateStatus" class="status"></div>
+            <button id="printCert" class="btn btn-primary" style="margin-top: 18px;">Imprimir certificado</button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module">
+      import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+      import { getAnalytics } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js';
+      import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
+      import { getDatabase, ref, get, set, update, remove } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js';
+      import { modules, moduleMaterials, moduleEssayPrompts, moduleStudyGuide } from './assets/js/modules.js';
+
+      const firebaseConfig = {
+        apiKey: 'AIzaSyB3yXWkqrLhRMTk6WdEWNiCGun26sMrgEc',
+        authDomain: 'seminarista.firebaseapp.com',
+        databaseURL: 'https://seminarista-default-rtdb.firebaseio.com',
+        projectId: 'seminarista',
+        storageBucket: 'seminarista.firebasestorage.app',
+        messagingSenderId: '507614373821',
+        appId: '1:507614373821:web:0bca63deda2af179b154d4',
+        measurementId: 'G-CE39953LFM'
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+      const auth = getAuth(app);
+      const db = getDatabase(app);
+      const provider = new GoogleAuthProvider();
+      let loginInProgress = false;
+
+      const storageKey = 'cathedral_digital_state';
+      const defaultChurchName = 'Igreja Batista Shalom';
+      const legacyModuleMaterials = {
+        1: 'documentos/apostilas/modulo-01-introducao-a-teologia.pdf',
+        2: 'documentos/apostilas/modulo-02-biblia-e-revelacao.pdf',
+        3: 'documentos/apostilas/modulo-03-hermeneutica-biblica.pdf',
+        4: 'documentos/apostilas/modulo-04-deus-e-a-trindade.pdf',
+        5: 'documentos/apostilas/modulo-05-cristologia.pdf',
+        6: 'documentos/apostilas/modulo-06-pneumatologia.pdf',
+        7: 'documentos/apostilas/modulo-07-antropologia-teologica.pdf',
+        8: 'documentos/apostilas/modulo-08-soteriologia.pdf',
+        9: 'documentos/apostilas/modulo-09-eclesiologia.pdf',
+        10: 'documentos/apostilas/modulo-10-historia-do-cristianismo.pdf',
+        11: 'documentos/apostilas/modulo-11-etica-crista-e-vida-pratica.pdf',
+        12: 'documentos/apostilas/modulo-12-ministerio-lideranca-e-missao.pdf'
+      };
+      const legacyModules = [
+        { number: 1, tag: 'Fundamentos', title: 'Introdução à Teologia', summary: 'Bases da fé, revelação e formação teológica.', goals: ['Compreender a natureza da teologia', 'Entender as fontes da revelação', 'Relacionar fé e razão'], chapters: ['Teologia e revelação', 'Escritura e tradição', 'Fundamentos da doutrina'], concepts: ['Revelação', 'Teologia', 'Fé', 'Dogma'], references: ['Gn 1:1', 'Jo 17:17', '2Tm 3:16'], applications: ['Leitura bíblica', 'Reflexão espiritual', 'Formação ministerial'] },
+        { number: 2, tag: 'Escrituras', title: 'Bíblia e Revelação', summary: 'Autoridade, inspiração e significado das Escrituras.', goals: ['Entender a Bíblia como revelação', 'Compreender inspiração e autoridade', 'Reconhecer a centralidade da Escritura'], chapters: ['Revelação de Deus', 'Inspiração e canonicidade', 'Autoridade bíblica'], concepts: ['Palavra de Deus', 'Inspiração', 'Canonicidade', 'Autoridade'], references: ['2Tm 3:16', '2Pe 1:20-21', 'Sl 119:105'], applications: ['Estudo pessoal', 'Aplicação pastoral', 'Ensino bíblico'] },
+        { number: 3, tag: 'Interpretação', title: 'Hermenêutica Bíblica', summary: 'Princípios para ler e aplicar a Palavra com fidelidade.', goals: ['Contextualizar o texto', 'Entender exegese e hermenêutica', 'Aplicar o texto corretamente'], chapters: ['Contexto histórico', 'Interpretação e aplicação', 'Princípios hermenêuticos'], concepts: ['Contexto', 'Exegese', 'Aplicação', 'Interpretação'], references: ['2Tm 2:15', 'Lc 24:27', 'Jo 5:39'], applications: ['Preparo de estudos', 'Sermões', 'Ensino e aconselhamento'] },
+        { number: 4, tag: 'Teologia', title: 'Deus e a Trindade', summary: 'Natureza de Deus, atributos e Santa Trindade.', goals: ['Entender a existência de Deus', 'Compreender atributos divinos', 'Estudar a Trindade'], chapters: ['Existência de Deus', 'Atributos divinos', 'Doutrina trinitária'], concepts: ['Aseidade', 'Onipotência', 'Providência', 'Trindade'], references: ['Dt 6:4', 'Mt 28:19', 'Jo 1:1'], applications: ['Teologia da adoração', 'Apologética', 'Vida espiritual'] },
+        { number: 5, tag: 'Cristologia', title: 'Cristologia', summary: 'Pessoa, obra e missão de Jesus Cristo.', goals: ['Compreender a identidade de Cristo', 'Estudar a encarnação', 'Refletir sobre Sua obra redentora'], chapters: ['Pré-existência de Cristo', 'Encarnação', 'Ressurreição e redenção'], concepts: ['Logos', 'Encarnação', 'Kenosis', 'Ressurreição'], references: ['Jo 1:1-14', 'Fl 2:5-11', 'Hb 7:24-25'], applications: ['Cristocentrismo', 'Evangelismo', 'Ensino pastoral'] },
+        { number: 6, tag: 'Espírito', title: 'Pneumatologia', summary: 'A pessoa e a obra do Espírito Santo.', goals: ['Entender a divindade do Espírito', 'Compreender Sua obra na salvação', 'Analisar dons e santificação'], chapters: ['Pessoa do Espírito', 'Obra regeneradora', 'Dons espirituais'], concepts: ['Parakletos', 'Regeneração', 'Santificação', 'Dons'], references: ['Jo 14:16-17', 'At 5:3-4', 'Ef 4:30'], applications: ['Oração', 'Discernimento', 'Vida devocional'] },
+        { number: 7, tag: 'Humano', title: 'Antropologia Teológica', summary: 'O homem à imagem de Deus e sua dignidade.', goals: ['Entender a criação humana', 'Analisar a constituição do homem', 'Refletir sobre queda e restauração'], chapters: ['Imagem de Deus', 'Constituição humana', 'Queda e restauração'], concepts: ['Imago Dei', 'Dignidade', 'Queda', 'Restauração'], references: ['Gn 1:26-27', 'Gn 2:7', 'Sl 139:13-16'], applications: ['Formação moral', 'Bioética', 'Aconselhamento'] },
+        { number: 8, tag: 'Salvação', title: 'Soteriologia', summary: 'Graça, pecado, justificação e ordem da salvação.', goals: ['Entender o pecado', 'Compreender a graça', 'Analisar a ordem da salvação'], chapters: ['Hamartiologia', 'Graça e justificação', 'Regeneração e perseverança'], concepts: ['Graça', 'Justificação', 'Regeneração', 'Salvação'], references: ['Rm 5:12', 'Ef 2:8-9', 'Tt 3:5'], applications: ['Evangelismo', 'Segurança da fé', 'Discipulado'] },
+        { number: 9, tag: 'Igreja', title: 'Eclesiologia', summary: 'A Igreja, seu governo, suas ordenanças e sua missão.', goals: ['Identificar a natureza da Igreja', 'Entender ordens e ordenanças', 'Conhecer a missão da Igreja'], chapters: ['Fundamento da Igreja', 'Ordenanças e governo', 'Missão integral'], concepts: ['Ekklesia', 'Batismo', 'Ceia', 'Missão'], references: ['Mt 16:18', '1Co 12:12-27', 'Mt 28:19-20'], applications: ['Vida congregacional', 'Ministério', 'Missão'] },
+        { number: 10, tag: 'História', title: 'História do Cristianismo', summary: 'Desenvolvimento histórico e movimentos da fé.', goals: ['Entender a evolução da Igreja', 'Conhecer a Reforma', 'Avaliar movimentos históricos'], chapters: ['Cristandade primitiva', 'Patrística e concílios', 'Reforma e contemporaneidade'], concepts: ['Patrística', 'Concílios', 'Reforma', 'Pietismo'], references: ['Mt 16:18', 'Jd 1:3', '95 Teses'], applications: ['Discernimento histórico', 'Teologia aplicada', 'Memória da Igreja'] },
+        { number: 11, tag: 'Ética', title: 'Ética Cristã e Vida Prática', summary: 'Valorização da vida, família e conduta cristã.', goals: ['Entender a ética bíblica', 'Analisar bioética', 'Aplicar princípios morais'], chapters: ['Fundamentos da ética', 'Bioética e vida', 'Família e trabalho'], concepts: ['Ética', 'Justiça', 'Moral', 'Família'], references: ['Êx 20:1-17', 'Mt 5:17-48', 'Tg 1:27'], applications: ['Decisões morais', 'Trabalho', 'Relacionamentos'] },
+        { number: 12, tag: 'Missão', title: 'Ministério, Liderança e Missão', summary: 'Vocação, liderança, pregação e chamada missionária.', goals: ['Entender o chamado ministerial', 'Desenvolver liderança', 'Refletir sobre a Grande Comissão'], chapters: ['Vocação e serviço', 'Homilética', 'Liderança e missão'], concepts: ['Vocação', 'Liderança', 'Missão', 'Grande Comissão'], references: ['1Pe 2:9', '2Tm 2:15', 'Mt 28:18-20'], applications: ['Pregação', 'Discipulado', 'Missão local'] }
+      ];
+
+      const defaultState = {
+        loggedIn: false,
+        acceptedTerms: false,
+        user: { name: 'Aluno(a)', email: 'aluno@exemplo.com' },
+        profile: { church: '', phone: '', course: '', bio: '' },
+        churchSupporterOptIn: false,
+        supporterChurches: [],
+        completed: [],
+        watched: [],
+        downloaded: [],
+        essays: {},
+        examPassed: false,
+        finalEssay: '',
+        finalEssaySubmittedAt: null,
+        certIssued: false
+      };
+
+      const state = loadState();
+
+      function getStorageKey(uid) {
+        const activeUid = uid || auth.currentUser?.uid || null;
+        return activeUid ? `${storageKey}:${activeUid}` : `${storageKey}:guest`;
+      }
+
+      function loadState(uid) {
+        const raw = localStorage.getItem(getStorageKey(uid));
+        const saved = raw ? JSON.parse(raw) : {};
+        return {
+          ...defaultState,
+          ...saved,
+          user: { ...defaultState.user, ...(saved.user || {}) },
+          profile: { ...defaultState.profile, ...(saved.profile || {}) },
+          churchSupporterOptIn: saved.churchSupporterOptIn === true,
+          supporterChurches: Array.isArray(saved.supporterChurches) ? saved.supporterChurches : [],
+          essays: saved.essays || {},
+          completed: Array.isArray(saved.completed) ? saved.completed : [],
+          watched: Array.isArray(saved.watched) ? saved.watched : [],
+          downloaded: Array.isArray(saved.downloaded) ? saved.downloaded : []
+        };
+      }
+
+      function getAuthStatePayload() {
+        return {
+          uid: auth.currentUser?.uid || state.uid || null,
+          loggedIn: state.loggedIn,
+          acceptedTerms: state.acceptedTerms,
+          user: state.user,
+          profile: state.profile,
+          churchSupporterOptIn: state.churchSupporterOptIn,
+          completed: state.completed,
+          watched: state.watched,
+          downloaded: state.downloaded,
+          essays: state.essays,
+          examPassed: state.examPassed,
+          certIssued: state.certIssued
+        };
+      }
+
+      function saveState() {
+        localStorage.setItem(getStorageKey(), JSON.stringify(state));
+        if (auth.currentUser) {
+          syncToFirebase(auth.currentUser.uid).catch((error) => console.error('Erro ao sincronizar Firebase:', error));
+        }
+      }
+
+      async function syncToFirebase(uid = auth.currentUser?.uid) {
+        if (!uid) return;
+
+        const payload = getAuthStatePayload();
+        payload.uid = uid;
+        payload.user = {
+          ...state.user,
+          uid,
+          provider: auth.currentUser?.providerData?.[0]?.providerId || 'google.com',
+          photoURL: auth.currentUser?.photoURL || null
+        };
+
+        await set(ref(db, `users/${uid}`), payload);
+      }
+
+      function mergeUserState(remote = {}) {
+        return {
+          ...defaultState,
+          ...state,
+          ...remote,
+          uid: remote.uid || state.uid || auth.currentUser?.uid || null,
+          user: { ...defaultState.user, ...(state.user || {}), ...(remote.user || {}) },
+          profile: { ...defaultState.profile, ...(state.profile || {}), ...(remote.profile || {}) },
+          churchSupporterOptIn: remote.churchSupporterOptIn === true,
+          supporterChurches: Array.isArray(remote.supporterChurches) ? remote.supporterChurches : state.supporterChurches,
+          completed: Array.isArray(remote.completed) ? remote.completed : state.completed,
+          watched: Array.isArray(remote.watched) ? remote.watched : state.watched,
+          downloaded: Array.isArray(remote.downloaded) ? remote.downloaded : state.downloaded,
+          essays: remote.essays || state.essays || {}
+        };
+      }
+
+      async function hydrateFromFirebase(uid) {
+        Object.assign(state, loadState(uid));
+        state.uid = uid;
+        const snapshot = await get(ref(db, `users/${uid}`));
+        if (!snapshot.exists()) {
+          await syncToFirebase(uid);
+          return;
+        }
+
+        const remote = snapshot.val() || {};
+        Object.assign(state, mergeUserState({ ...loadState(uid), ...remote }));
+        state.uid = uid;
+        localStorage.setItem(getStorageKey(uid), JSON.stringify(state));
+      }
+
+      function setView(viewName) {
+        document.querySelectorAll('.page').forEach(page => page.classList.toggle('active', page.dataset.view === viewName));
+        document.querySelectorAll('.nav-item').forEach(btn => btn.classList.toggle('active', btn.dataset.view === viewName));
+        if (viewName === 'exam') renderExam();
+        if (viewName === 'certificate') renderCertificate();
+      }
+
+      function resetFormation() {
+        const confirmed = confirm('Zerar a formação? Isso apagará módulos concluídos, aulas assistidas, redações, prova e certificado. Seu login, perfil e igreja serão preservados.');
+        if (!confirmed) return;
+
+        state.completed = [];
+        state.watched = [];
+        state.downloaded = [];
+        state.essays = {};
+        state.examPassed = false;
+        state.finalEssay = '';
+        state.finalEssaySubmittedAt = null;
+        state.certIssued = false;
+        saveState();
+        renderDashboard();
+        renderModules();
+        renderExam();
+        renderCertificate();
+        document.getElementById('profileStatus').textContent = 'Formação zerada. Seu perfil foi preservado.';
+      }
+
+      function applyChurchName() {
+        const input = document.getElementById('churchNameInput');
+        const consent = document.getElementById('churchSupporterConsent');
+        const value = input.value.trim();
+        if (!value) {
+          document.getElementById('profileStatus')?.replaceChildren();
+          alert('Informe o nome da igreja antes de aplicar.');
+          input.focus();
+          return;
+        }
+        state.profile.church = value;
+        state.churchSupporterOptIn = consent.checked;
+        document.getElementById('headerChurch').textContent = value;
+        document.getElementById('sidebarChurch').textContent = value;
+        document.getElementById('heroTitle').textContent = `${value} | Plataforma de formação EAD`;
+        saveState();
+        syncSupporterRegistration();
+        renderSupporterCard();
+        renderProfile();
+      }
+
+      async function syncSupporterRegistration() {
+        const uid = auth.currentUser?.uid || state.uid;
+        if (!uid || !state.profile.church) return;
+        const supporterRef = ref(db, `supporters/${uid}`);
+        try {
+          if (state.churchSupporterOptIn) {
+            await set(supporterRef, { name: state.profile.church, updatedAt: Date.now() });
+          } else {
+            await remove(supporterRef);
+          }
+          await loadSupporters();
+        } catch (error) {
+          console.error('Erro ao atualizar igreja apoiadora:', error);
+        }
+      }
+
+      async function loadSupporters() {
+        try {
+          const snapshot = await get(ref(db, 'supporters'));
+          state.supporterChurches = snapshot.exists()
+            ? Object.values(snapshot.val()).map(item => item.name).filter(Boolean)
+            : [];
+          renderSupporterCard();
+        } catch (error) {
+          state.supporterChurches = state.churchSupporterOptIn && state.profile.church ? [state.profile.church] : [];
+          renderSupporterCard();
+        }
+      }
+
+      function escapeHtml(value) {
+        return String(value).replace(/[&<>'"]/g, character => ({
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          "'": '&#39;',
+          '"': '&quot;'
+        }[character]));
+      }
+
+      function renderSupporterCard() {
+        const gallery = document.getElementById('supporterGallery');
+        const grid = document.getElementById('supporterGalleryGrid');
+        const supporters = state.supporterChurches?.length
+          ? state.supporterChurches
+          : (state.churchSupporterOptIn && state.profile.church ? [state.profile.church] : []);
+        const allowed = supporters.length > 0;
+        gallery.classList.toggle('hidden', !allowed);
+        if (allowed) {
+          grid.innerHTML = supporters.map(name => `
+            <div class="supporter-tile">
+              <span class="supporter-seal" aria-hidden="true">✓</span>
+              <strong>${escapeHtml(name)}</strong>
+            </div>
+          `).join('');
+        }
+      }
+
+      function renderModuleCard(module, compact = false) {
+        const doneFlag = state.completed.includes(module.number);
+        const actionLabel = compact ? (doneFlag ? 'Revisar' : 'Acessar') : 'Abrir módulo';
+        const firstStatus = compact
+          ? `📄 ${state.downloaded.includes(module.number) ? 'Baixado' : 'Pendente'}`
+          : `${state.watched.includes(module.number) ? '▶ Assistido' : '▶ Pendente'}`;
+        const secondStatus = compact
+          ? ''
+          : `<span>${state.downloaded.includes(module.number) ? '📄 Baixado' : '📄 Não baixado'}</span>`;
+
+        return `
+          <article class="module-card ${doneFlag ? 'done' : ''}">
+            <div class="card-top">
+              <span class="module-number">Módulo ${module.number}</span>
+              <span class="module-badge">${doneFlag ? 'Concluído' : module.tag}</span>
+            </div>
+            <h3>${module.title}</h3>
+            <p>${module.summary}</p>
+            <div class="card-meta">
+              <span>${firstStatus}</span>
+              ${secondStatus}
+            </div>
+            <button class="card-btn" data-open-module="${module.number}">${actionLabel}</button>
+          </article>
+        `;
+      }
+
+      function bindModuleButtons() {
+        return;
+      }
+
+      function bindNavigationDelegation() {
+        document.addEventListener('click', (event) => {
+          const moduleButton = event.target.closest('[data-open-module]');
+          if (moduleButton) {
+            event.preventDefault();
+            openModule(Number(moduleButton.dataset.openModule));
+            return;
+          }
+
+          const viewButton = event.target.closest('[data-view]');
+          if (viewButton && viewButton.dataset.view) {
+            event.preventDefault();
+            setView(viewButton.dataset.view);
+          }
+        });
+      }
+
+      function renderDashboard() {
+        const total = modules.length;
+        const done = state.completed.length;
+        const percent = Math.round((done / total) * 100);
+        document.getElementById('progressValue').textContent = `${percent}%`;
+        document.getElementById('progressBar').style.width = `${percent}%`;
+        document.getElementById('progressText').textContent = `${done} de ${total} módulos`;
+        const next = modules.find(m => !state.completed.includes(m.number));
+        document.getElementById('nextModuleValue').textContent = next ? `Módulo ${next.number}` : 'Formação concluída';
+
+        document.getElementById('dashboardCards').innerHTML = next
+          ? renderModuleCard(next, true)
+          : `
+            <article class="module-card done">
+              <div class="card-top">
+                <span class="module-number">Etapa concluída</span>
+                <span class="module-badge">12 de 12</span>
+              </div>
+              <h3>Formação concluída</h3>
+              <p>Você concluiu todos os módulos. Agora faça a prova final para liberar o certificado.</p>
+              <button class="card-btn" data-view="exam">Ir para a prova final</button>
+            </article>
+          `;
+        bindModuleButtons();
+      }
+
+      function renderModules() {
+        document.getElementById('moduleList').innerHTML = modules.map(module => renderModuleCard(module)).join('');
+        bindModuleButtons();
+      }
+
+      function buildSermonPrompt(module) {
+        return moduleEssayPrompts[module.number] || `Prepare um breve sermão dominical sobre ${module.title}, relacionando o conteúdo estudado com a vida da igreja e a missão cristã.`;
+      }
+
+      function getModuleEssay(moduleNumber) {
+        return state.essays?.[moduleNumber] || {
+          title: '',
+          biblicalText: '',
+          introduction: '',
+          development: '',
+          application: '',
+          conclusion: ''
+        };
+      }
+
+      function getModuleMaterial(moduleNumber) {
+        return moduleMaterials[moduleNumber];
+      }
+
+      const essayRequirements = {
+        title: { label: 'título', minimum: 8 },
+        biblicalText: { label: 'texto bíblico', minimum: 5 },
+        introduction: { label: 'introdução', minimum: 40 },
+        development: { label: 'desenvolvimento', minimum: 80 },
+        application: { label: 'aplicação', minimum: 40 },
+        conclusion: { label: 'conclusão', minimum: 30 }
+      };
+
+      const sermonConnectors = ['porque', 'assim', 'portanto', 'porém', 'contudo', 'além disso', 'dessa forma', 'por isso', 'também', 'quando', 'como', 'para que'];
+
+      function normalizeEssayText(value) {
+        return (value || '').toLocaleLowerCase('pt-BR').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
+      }
+
+      function getSermonQualityMessage(essay) {
+        const body = [essay.introduction, essay.development, essay.application, essay.conclusion].join(' ');
+        const normalized = normalizeEssayText(body);
+        const words = normalized.split(' ').filter(word => word.length > 2);
+        const uniqueWords = new Set(words);
+        const connectors = sermonConnectors.filter(connector => normalized.includes(connector)).length;
+        const sentences = body.split(/[.!?]+/).map(sentence => sentence.trim()).filter(Boolean);
+        const hasRepeatedCharacters = /(.)\1{4,}/i.test(body) || /(?:\d[\s-]*){6,}/.test(body);
+        const hasRepeatedWords = /(\b[a-zà-ÿ]{3,}\b)(?:\s+\1){2,}/i.test(body);
+        const messages = [];
+
+        if (hasRepeatedCharacters || hasRepeatedWords) messages.push('retire sequências e palavras repetidas');
+        if (words.length < 70) messages.push('desenvolva melhor a mensagem (mínimo de 70 palavras no corpo)');
+        if (words.length && uniqueWords.size / words.length < 0.38) messages.push('use vocabulário mais próprio e variado');
+        if (sentences.length < 4) messages.push('escreva frases completas em todas as partes');
+        if (connectors < 2) messages.push('conecte as ideias usando transições como porque, portanto ou assim');
+
+        return messages;
+      }
+
+      function getEssayValidationMessage(essay) {
+        const fieldMessages = Object.entries(essayRequirements)
+          .filter(([field, requirement]) => !essay[field] || essay[field].trim().length < requirement.minimum)
+          .map(([, requirement]) => `${requirement.label} (${requirement.minimum} caracteres)`);
+        return [...fieldMessages, ...getSermonQualityMessage(essay)].join(', ');
+      }
+
+      function isModuleEssayComplete(essay) {
+        return getEssayValidationMessage(essay) === '';
+      }
+
+      function openModule(moduleNumber) {
+        const module = modules.find(item => item.number === moduleNumber) || modules[0];
+        const materialPath = getModuleMaterial(moduleNumber);
+        const watched = state.watched.includes(moduleNumber);
+        const downloaded = state.downloaded.includes(moduleNumber);
+        const guide = moduleStudyGuide[moduleNumber] || {
+          question: 'Estude o conteúdo principal da apostila deste módulo.',
+          hint: 'Consulte os tópicos centrais e referências bíblicas na apostila.',
+          pdfPage: 'Apostila PDF do módulo'
+        };
+
+        document.getElementById('detailContainer').innerHTML = `
+          <div class="detail-head">
+            <div>
+              <div class="eyebrow">Módulo ${String(module.number).padStart(2, '0')} · ${module.tag}</div>
+              <h2>${module.title}</h2>
+              <p>${module.summary}</p>
+            </div>
+            <button class="btn" data-view="modules">Fechar módulo</button>
+          </div>
+
+          <div class="keyword-list" aria-label="Palavras-chave do módulo">
+            ${module.concepts.map(keyword => `<span class="keyword">${keyword}</span>`).join('')}
+          </div>
+
+          <div class="learning-guide">
+            <div class="eyebrow">Orientação deste módulo</div>
+            <h2>Leia, compreenda e reflita</h2>
+            <p>Assista à aula, consulte o material em PDF e reflita sobre a pergunta chave de estudo do módulo para aprofundar seu conhecimento teológico.</p>
+          </div>
+
+          <div class="learning-core">
+            <section class="learning-step">
+              <span class="step-number">1</span>
+              <div class="eyebrow">Aula principal · Slide ${module.number}</div>
+              <h3>Veja a aula</h3>
+              <p>Este é o conteúdo central do módulo. Assista com atenção e observe os pontos doutrinários principais.</p>
+              <button class="btn btn-primary" id="openLessonBtn">${watched ? 'Rever aula' : 'Começar aula'}</button>
+              <span class="learning-status">${watched ? 'Aula registrada como assistida.' : 'Ainda não assistida.'}</span>
+            </section>
+
+            <div id="lessonViewer" class="lesson-viewer">
+              <div class="eyebrow">Aula do módulo ${module.number} · Slide ${module.number}</div>
+              <iframe title="Slide da aula" src="about:blank"></iframe>
+            </div>
+
+            <section class="learning-step material-step">
+              <span class="step-number">2</span>
+              <div class="eyebrow">Material obrigatório</div>
+              <h3>Baixe e consulte a apostila</h3>
+              <p>A apostila aprofunda a aula em detalhes. Baixe o PDF e consulte as fundamentações teológicas.</p>
+              <a class="btn btn-primary" href="${materialPath}" download rel="noopener">Baixar apostila do módulo ${module.number}</a>
+              <span class="learning-status">${downloaded ? 'Material registrado como baixado.' : 'Material ainda não baixado.'}</span>
+            </section>
+          </div>
+
+          <div class="quiz-box" style="margin-top: 24px; border: 1px solid var(--line); border-radius: 14px; padding: 22px; background: var(--panel);">
+            <div class="eyebrow" style="color: var(--accent); font-weight: 700; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.1em;">Guia de Estudo & Fixação do Módulo</div>
+            <h3 style="margin: 8px 0 12px; font-size: 1.15rem; color: var(--text);">Pergunta Chave de Estudo</h3>
+            <p style="font-size: 1rem; color: var(--text); line-height: 1.6; font-weight: 600;">${guide.question}</p>
+            
+            <div style="margin-top: 16px; background: rgba(124, 147, 255, 0.08); border-left: 4px solid var(--primary); padding: 14px 18px; border-radius: 8px;">
+              <strong style="color: var(--primary); font-size: 0.9rem;">💡 Dica de Leitura & Resposta:</strong>
+              <p style="margin: 6px 0 0; color: var(--text); font-size: 0.95rem; line-height: 1.5;">${guide.hint}</p>
+              <div style="margin-top: 10px; font-size: 0.85rem; color: var(--muted); font-weight: 600;">
+                📌 <strong>Onde encontrar na apostila:</strong> ${guide.pdfPage}
+              </div>
+            </div>
+          </div>
+
+          <div class="module-actions" style="margin-top: 24px;">
+            <button class="btn ${state.completed.includes(module.number) ? 'btn-success' : 'btn-primary'}" id="completeModuleBtn">${state.completed.includes(module.number) ? 'Módulo concluído ✓' : 'Concluir módulo agora'}</button>
+          </div>
+        `;
+
+        document.querySelector('[data-view="modules"]').addEventListener('click', () => setView('modules'));
+
+        document.getElementById('openLessonBtn').addEventListener('click', () => {
+          const viewer = document.getElementById('lessonViewer');
+          viewer.querySelector('iframe').src = `Cathedral_of_Doctrine.pdf#page=${module.number}&zoom=page-width`;
+          viewer.classList.add('visible');
+          if (!state.watched.includes(moduleNumber)) state.watched.push(moduleNumber);
+          if (!state.downloaded.includes(moduleNumber)) state.downloaded.push(moduleNumber);
+          saveState();
+          renderDashboard();
+          renderModules();
+          openModule(moduleNumber);
+        });
+
+        document.querySelector('a[rel="noopener"]').addEventListener('click', () => {
+          if (!state.downloaded.includes(moduleNumber)) state.downloaded.push(moduleNumber);
+          if (!state.watched.includes(moduleNumber)) state.watched.push(moduleNumber);
+          saveState();
+          renderDashboard();
+          renderModules();
+          openModule(moduleNumber);
+        });
+
+        document.getElementById('completeModuleBtn').addEventListener('click', () => {
+          if (!state.completed.includes(moduleNumber)) state.completed.push(moduleNumber);
+          if (!state.watched.includes(moduleNumber)) state.watched.push(moduleNumber);
+          if (!state.downloaded.includes(moduleNumber)) state.downloaded.push(moduleNumber);
+          saveState();
+          renderDashboard();
+          renderModules();
+          renderExam();
+          setView('modules');
+        });
+
+        setView('module-detail');
+      }
+
+      function renderProfile() {
+        const user = state.user;
+        const church = state.profile.church || defaultChurchName;
+        document.getElementById('profileName').value = user.name;
+        document.getElementById('profileEmail').value = user.email;
+        document.getElementById('profileChurch').value = state.profile.church;
+        document.getElementById('profilePhone').value = state.profile.phone;
+        document.getElementById('profileCourse').value = state.profile.course;
+        document.getElementById('profileBio').value = state.profile.bio;
+
+        document.getElementById('summaryName').textContent = user.name;
+        document.getElementById('summaryEmail').textContent = user.email;
+        document.getElementById('summaryChurch').textContent = state.profile.church || 'Não informada';
+        document.getElementById('summaryCourse').textContent = state.profile.course || 'Não informado';
+        document.getElementById('churchNameInput').value = church;
+        document.getElementById('churchSupporterConsent').checked = state.churchSupporterOptIn;
+        document.getElementById('headerChurch').textContent = church;
+        document.getElementById('sidebarChurch').textContent = church;
+        document.getElementById('heroTitle').textContent = `${church} | Plataforma de formação EAD`;
+      }
+
+      function renderExam() {
+        const modulesComplete = state.completed.length === modules.length;
+        document.getElementById('examForm').innerHTML = `
+          <div class="question">
+            <p style="font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 8px;">Redação Final: Avaliação de Síntese Teológica</p>
+            <p style="color: var(--muted); line-height: 1.6; font-size: 0.95rem;">Explique sucintamente como a formação teológica estudada nos 12 módulos pode ser aplicada na vida prática, no ministério e na missão da igreja contemporânea.</p>
+            
+            ${!modulesComplete ? `
+              <div style="margin: 16px 0; padding: 14px 18px; background: rgba(255, 155, 106, 0.12); border-left: 4px solid var(--accent); border-radius: 8px; font-size: 0.9rem;">
+                <strong>⚠️ Progresso dos Módulos:</strong> Você concluiu ${state.completed.length} de ${modules.length} módulos.
+                <br>Você pode concluir todos os módulos individualmente ou usar o botão abaixo para avançar:
+                <div style="margin-top: 10px;">
+                  <button id="unlockAllModulesBtn" class="btn btn-primary" style="font-size: 0.85rem; padding: 8px 14px;">Marcar todos os 12 módulos como concluídos ✓</button>
+                </div>
+              </div>
+            ` : ''}
+
+            <textarea id="finalEssay" maxlength="5000" placeholder="Escreva sua redação final aqui (mínimo de 500 caracteres)..." style="width: 100%; min-height: 200px; padding: 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--text); font-family: inherit; font-size: 0.95rem; margin-top: 12px; line-height: 1.6;"></textarea>
+            <div id="essayCounter" class="status" style="margin-top: 8px; font-weight: 600;">${(state.finalEssay || '').length}/5000 caracteres (mínimo: 500)</div>
+          </div>
+        `;
+
+        const essay = document.getElementById('finalEssay');
+        const counter = document.getElementById('essayCounter');
+        essay.value = state.finalEssay || '';
+        
+        essay.addEventListener('input', () => {
+          counter.textContent = `${essay.value.length}/5000 caracteres (mínimo: 500)`;
+        });
+
+        const unlockBtn = document.getElementById('unlockAllModulesBtn');
+        if (unlockBtn) {
+          unlockBtn.addEventListener('click', () => {
+            state.completed = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+            state.watched = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+            state.downloaded = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+            saveState();
+            renderDashboard();
+            renderModules();
+            renderExam();
+          });
+        }
+
+        const isCompleteNow = state.completed.length === modules.length;
+        document.getElementById('submitExam').disabled = !isCompleteNow;
+        document.getElementById('examStatus').textContent = isCompleteNow
+          ? (state.examPassed ? 'Redação enviada e aprovada com sucesso! Seu certificado está liberado.' : 'Escreva pelo menos 500 caracteres e clique em Enviar Redação para concluir.')
+          : `Conclua os ${modules.length - state.completed.length} módulo(s) restantes para liberar o envio da prova.`;
+      }
+
+      function canIssueCertificate() {
+        return state.completed.length === modules.length && state.examPassed === true;
+      }
+
+      function renderCertificate() {
+        document.getElementById('certName').textContent = state.user.name;
+        document.getElementById('certCourse').textContent = state.profile.course || 'Cathedral of Doctrine';
+        document.getElementById('certDate').textContent = new Date().toLocaleDateString('pt-BR');
+        const eligible = canIssueCertificate();
+        const printButton = document.getElementById('printCert');
+        printButton.disabled = !eligible;
+        document.getElementById('certificateStatus').textContent = eligible
+          ? 'Certificado liberado após conclusão dos módulos e aprovação da redação.'
+          : 'Certificado bloqueado: conclua todos os módulos e envie a redação final.';
+      }
+
+      function toggleAuth() {
+        const authOverlay = document.getElementById('authOverlay');
+        authOverlay.classList.toggle('hidden', state.loggedIn);
+      }
+
+      function renderHeader() {
+        const loginBtn = document.getElementById('loginBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const userBox = document.getElementById('userBox');
+        const isLogged = state.loggedIn;
+
+        loginBtn.classList.toggle('hidden', isLogged);
+        logoutBtn.classList.toggle('hidden', !isLogged);
+        userBox.classList.toggle('hidden', !isLogged);
+
+        if (isLogged) {
+          document.getElementById('userName').textContent = state.user.name;
+          document.getElementById('userEmail').textContent = state.user.email;
+          document.getElementById('userChurch').textContent = state.profile.church || 'Igreja não informada';
+          document.getElementById('userAvatar').textContent = state.user.name.slice(0, 2).toUpperCase();
+        }
+      }
+
+      async function handleLogin() {
+        if (!state.acceptedTerms) {
+          document.getElementById('termsModal').classList.add('visible');
+          return;
+        }
+        if (loginInProgress || auth.currentUser) return;
+
+        loginInProgress = true;
+        document.querySelectorAll('#loginBtn, #googleLogin').forEach(button => {
+          button.disabled = true;
+          button.textContent = 'Entrando...';
+        });
+
+        try {
+          const result = await signInWithPopup(auth, provider);
+          const user = result.user;
+          state.uid = user.uid;
+          state.user = {
+            name: user.displayName || 'Aluno(a)',
+            email: user.email || 'aluno@exemplo.com',
+            uid: user.uid,
+            provider: user.providerData?.[0]?.providerId || 'google.com',
+            photoURL: user.photoURL || null
+          };
+          state.loggedIn = true;
+          saveState();
+          renderHeader();
+          renderProfile();
+          renderSupporterCard();
+          renderCertificate();
+          toggleAuth();
+        } catch (error) {
+          if (error.code !== 'auth/cancelled-popup-request' && error.code !== 'auth/popup-closed-by-user') {
+            console.error('Erro no login com Google:', error);
+            alert('Não foi possível entrar com Google. Tente novamente.');
+          }
+        } finally {
+          loginInProgress = false;
+          if (!auth.currentUser) {
+            document.querySelectorAll('#loginBtn, #googleLogin').forEach(button => {
+              button.disabled = false;
+              button.textContent = 'Entrar com Google';
+            });
+          }
+        }
+      }
+
+      async function handleLogout() {
+        try {
+          await signOut(auth);
+        } catch (error) {
+          console.error('Erro no logout:', error);
+        }
+
+        state.uid = null;
+        state.loggedIn = false;
+        saveState();
+        renderHeader();
+        toggleAuth();
+      }
+
+      function bindEvents() {
+        document.querySelectorAll('.nav-item').forEach(button => {
+          button.addEventListener('click', () => setView(button.dataset.view));
+        });
+
+        document.querySelectorAll('[data-view="modules"]').forEach(button => {
+          button.addEventListener('click', () => setView('modules'));
+        });
+
+        document.getElementById('loginBtn').addEventListener('click', handleLogin);
+        document.getElementById('googleLogin').addEventListener('click', handleLogin);
+        document.getElementById('logoutBtn').addEventListener('click', handleLogout);
+
+        document.getElementById('applyChurchName').addEventListener('click', applyChurchName);
+        document.getElementById('acceptTerms').addEventListener('click', () => {
+          state.acceptedTerms = true;
+          document.getElementById('termsModal').classList.remove('visible');
+          saveState();
+          handleLogin();
+        });
+
+        document.getElementById('declineTerms').addEventListener('click', () => {
+          document.getElementById('termsModal').classList.remove('visible');
+        });
+
+        document.getElementById('saveProfile').addEventListener('click', () => {
+          state.user.name = document.getElementById('profileName').value || state.user.name;
+          state.user.email = document.getElementById('profileEmail').value || state.user.email;
+          state.user.uid = auth.currentUser?.uid || state.uid || state.user.uid;
+          state.profile = {
+            church: document.getElementById('profileChurch').value,
+            phone: document.getElementById('profilePhone').value,
+            course: document.getElementById('profileCourse').value,
+            bio: document.getElementById('profileBio').value
+          };
+          saveState();
+          renderHeader();
+          renderProfile();
+          renderSupporterCard();
+          renderCertificate();
+          document.getElementById('profileStatus').textContent = 'Perfil salvo com sucesso.';
+        });
+
+        document.getElementById('resetFormation').addEventListener('click', resetFormation);
+
+        document.getElementById('submitExam').addEventListener('click', () => {
+          if (state.finalEssaySubmittedAt) {
+            setView('dashboard');
+            return;
+          }
+
+          if (state.completed.length !== modules.length) {
+            document.getElementById('examStatus').textContent = 'Conclua todos os módulos antes de enviar a redação.';
+            return;
+          }
+
+          const essay = document.getElementById('finalEssay').value.trim();
+          state.finalEssay = essay;
+          if (essay.length < 500) {
+            state.examPassed = false;
+            document.getElementById('examStatus').textContent = `A redação precisa ter pelo menos 500 caracteres. Atualmente: ${essay.length}.`;
+            saveState();
+            renderCertificate();
+            return;
+          }
+
+          state.examPassed = true;
+          state.finalEssaySubmittedAt = new Date().toISOString();
+          state.certIssued = false;
+          saveState();
+          document.getElementById('submitExam').textContent = 'Fechar redação';
+          document.getElementById('examStatus').textContent = 'Redação enviada e aprovada. O certificado foi liberado.';
+          renderCertificate();
+          saveState();
+        });
+
+        document.getElementById('printCert').addEventListener('click', () => {
+          if (!canIssueCertificate()) return;
+          state.certIssued = true;
+          saveState();
+          window.print();
+        });
+
+      }
+
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          state.uid = user.uid;
+          state.loggedIn = true;
+          state.user = {
+            name: user.displayName || state.user.name,
+            email: user.email || state.user.email,
+            uid: user.uid,
+            provider: user.providerData?.[0]?.providerId || 'google.com',
+            photoURL: user.photoURL || null
+          };
+          await hydrateFromFirebase(user.uid);
+          await loadSupporters();
+          renderHeader();
+          renderProfile();
+          renderCertificate();
+          toggleAuth();
+        } else {
+          state.uid = null;
+          state.loggedIn = false;
+          saveState();
+          renderHeader();
+          toggleAuth();
+        }
+      });
+
+      function init() {
+        const savedChurch = state.profile.church || defaultChurchName;
+        document.getElementById('churchNameInput').value = savedChurch;
+        document.getElementById('churchSupporterConsent').checked = state.churchSupporterOptIn;
+        document.getElementById('headerChurch').textContent = savedChurch;
+        document.getElementById('sidebarChurch').textContent = savedChurch;
+        document.getElementById('heroTitle').textContent = `${savedChurch} | Plataforma de formação EAD`;
+
+        renderDashboard();
+        renderModules();
+        renderProfile();
+        renderSupporterCard();
+        renderExam();
+        renderCertificate();
+        renderHeader();
+        toggleAuth();
+        bindNavigationDelegation();
+        bindEvents();
+        const requestedModule = Number(new URLSearchParams(window.location.search).get('modulo'));
+        if (requestedModule >= 1 && requestedModule <= modules.length) {
+          openModule(requestedModule);
+        } else {
+          setView('dashboard');
+        }
+      }
+
+      init();
+    </script>
+  </body>
+</html>
